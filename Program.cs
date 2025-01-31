@@ -54,22 +54,12 @@
 
 class Program
 {
-    public static bool Contains<T>(BinNode<T> root, T value)
+    public static bool Contains(BinNode<int> root, int value)
     {
-        bool flag = false;
-        if (root == null)
-        {
-            return false;
-        }
-        if (root.GetValue().Equals(value)) { return true; }
-        if (root.GetLeft() != null)
-        {
-            flag = Contains<T>(root.GetLeft(), value);
-        }
-        if (root.GetRight() != null)
-        {
-            flag = flag || Contains<T>(root.GetRight(), value);
-        }
-        return flag;
+        if (root == null) { return false; }
+        if (root.GetValue() == value) { return true; }
+        if (root.GetValue() < value) { return Contains(root.GetRight(), value); }
+        if (root.GetValue() > value) { return Contains(root.GetLeft(), value); }
+        return false;
     }
 }
